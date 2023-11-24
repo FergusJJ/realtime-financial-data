@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package financialData;
+
+option go_package = "./pb";
+
+service financialData {
+  rpc Ping(PingRequest) returns (PingResponse);
+}
+
+message PingRequest {
+  int32 ping = 1;
+}
+
+message PingResponse {
+  int32 pong = 1;
+}
