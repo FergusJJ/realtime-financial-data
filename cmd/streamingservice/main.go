@@ -3,7 +3,8 @@ package main
 import (
 	"log"
 	"net"
-  "github.com/FergusJJ/realtimeFinancialData/internal/proto/pb"
+
+	pb "github.com/FergusJJ/realtime-financial-data/internal/proto/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -14,19 +15,18 @@ import (
 */
 
 type server struct {
-
 }
 
-func main(){
-  listener, err := net.Listen("tcp", ":8080")
-  if err != nil {
-    log.Fatalln("failed to create listener: ",err)
-  }
-  s := grpc.NewServer()
-  reflection.Register(s)
+func main() {
+	listener, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		log.Fatalln("failed to create listener: ", err)
+	}
+	s := grpc.NewServer()
+	reflection.Register(s)
 
-  pb.RegisterFinancialDataServer(s, &server{})
-  if err := s.Serve(listener); err != nil {
-    log.Fatalln("failed to serve:", err)
-  }
+	pb.RegisterFinancialDataServer(s, &server{})
+	if err := s.Serve(listener); err != nil {
+		log.Fatalln("failed to serve:", err)
+	}
 }
