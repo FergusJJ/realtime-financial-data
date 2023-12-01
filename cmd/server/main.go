@@ -36,7 +36,7 @@ func initServer() *grpc.Server {
   }
 
   var opts []grpc.ServerOption
-//  opts = append(opts, grpc.ChainStreamInterceptor(logging.StreamServerInterceptor(server.InterceptorLogger(logger), slopts...)))
+  opts = append(opts, grpc.ChainStreamInterceptor(logging.StreamServerInterceptor(server.InterceptorLogger(logger), slopts...)))
   opts = append(opts, grpc.ChainUnaryInterceptor(logging.UnaryServerInterceptor(server.InterceptorLogger(logger), slopts...)))
   s := grpc.NewServer(
     opts...,
